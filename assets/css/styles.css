@@ -1,0 +1,16 @@
+.jumbotron {
+    background:url('../images/tl2017.jpg');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    text-align: center;
+}
+
+h1, .lead {
+    color: white;
+    font-style: bold;
+    font-size: 40px;
+    text-align: center;
+}
+
