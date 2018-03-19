@@ -4,9 +4,22 @@
 <head>
   <meta charset="utf-8">
   <title>Giphy</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
+
+        <div class="jumbotron">
+                <h1 class="display-4">Who's your favorite DJ?</h1>
+                <p class="lead">Put your party mode ON with animated GIF's from your favorite DJ</p>
+                <hr class="my-4">
+                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                <p class="lead">
+                  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                </p>
+              </div>
+      
+
   <div id="buttons">
     
     <button data-person="hardwell">
@@ -35,10 +48,10 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
+    
     $("button").on("click", function() {
       var person = $(this).attr("data-person");
-      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        person + "&api_key=dc6zaTOxFJmzC&limit=10";
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + person + "&api_key=dc6zaTOxFJmzC&limit=10";
 
       $.ajax({
         url: queryURL,
@@ -60,10 +73,26 @@
             gifDiv.prepend(p);
             gifDiv.prepend(personImage);
 
-            $("#gifs-appear-here").prepend(gifDiv);
+            $("#gifs-appear-here").prepend(gifDiv);           
+
           }
         });
     });
+
+    // Function to start GIF sill and click to make move and click back to make still
+
+    // $(".gif").on("click", function() {
+    //     var state = $(this).attr("data-state");
+
+    //         if (state === "still") {
+    //         $(this).attr("src", $(this).attr("data-animate"));
+    //         $(this).attr("data-state", "animate");
+    //     } else {
+    //         $(this).attr("src", $(this).attr("data-still"));
+    //         $(this).attr("data-state", "still");
+    //     }
+    // });
+
   </script>
 </body>
 
