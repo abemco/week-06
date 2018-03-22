@@ -11,12 +11,15 @@ h1 {
     font-family: 'Hammersmith One', sans-serif;
 }
 
-h1, .lead {
+h1, h5, .lead {
     color: white;
     font-style: bold;
-    font-size: 40px;
+    font-size: 25px;
     text-align: center;
     text-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
 }
 
+.form-control {
+    text-align: center;
+}
 
