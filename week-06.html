@@ -1,59 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Giphy</title>
+	<title>Best DJ's GIFs</title>
+</head>
 
-  <!-- Bootstrap CDN -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<!-- Bootstrap CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
   <!-- Google fonts -->
   <link href="https://fonts.googleapis.com/css?family=Hammersmith+One" rel="stylesheet">
   <link rel="stylesheet" type="text/css" media="screen" href="assets/css/styles.css">
 
-</head>
-
 <body>
+	
+	<div class="jumbotron">
+		<h1>Who's Your Favorite DJ?</h1>
+		<h3>Put your party mode ON with animated GIF's from your favorite DJ</h3><br>	
+		<!--New buttons added-->
+		<div id="newbuttons"></div>
 
-        <div class="jumbotron">
-                <h1 class="display-4">Who's your favorite DJ?</h1>
-                <p class="lead">Put your party mode ON with animated GIF's from your favorite DJ</p>
-                                
-                <form action="/action_page.php">
-                  <div class="form-group">
-                    <h5>If your favorite DJ is not on the list add it here</h5>
-                    <input type="text" class="form-control" id="search">
-                  </div>
-                  <button type="submit" class="btn btn-default" id="searchBtn">Add GIF</button>
-                </form>
-        </div>
+		<form id="gif-form">
+			<label for="gif-input"></label>
+			<h3>If your favorite DJ is not on the list add it here</h3>
+			<input type="text" id="gif-input"><br><br>
 
-
-
-  <div id="buttons">
-    
-    <button data-person="hardwell">Hardwell</button>
-    <button data-person="armin van buuren">Armin Van Buuren</button>
-    <button data-person="swedish house mafia">Swedish House Mafia</button>
-    <button data-person="tiesto">Tiesto</button>
-    <button data-person="david guetta">David Guetta</button>
-    <button data-person="dj carl cox">Carl Cox</button>
-    <button data-person="dj major lazer">Major Lazer</button>
-    <button data-person="dash berlin">Dash Berlin</button>
-    <button data-person="dj eric prydz">Eric Prydz</button>
-    <button data-person="steve aoki">Steve Aoki</button>
-    <button data-person="paul van dyk">Paul Van Dyk</button>
-    <button data-person="avicii">Avicii</button>
-    <button data-person="daft punk">Daft Punk</button>
-    
+			<!--Button click adds new gif-->
+			<input id="add-gif" type="submit" value="Add GIF!" class="btn btn-success">
+		</form><br>
   </div>
+  
+  <!--GIFs will be appended to this div element-->
+  <div id="gif-view"></div>
 
-<br>
-
-  <div id="gifs-appear-here">
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"
+	  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="crossorigin="anonymous"></script>
 	<script type="text/javascript" src="assets/javascript/app.js"></script>
 
 </body>

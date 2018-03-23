@@ -9,9 +9,11 @@
 
 h1 {
     font-family: 'Hammersmith One', sans-serif;
+    font-size: 50px;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
 }
 
-h1, h5, .lead {
+h3 {
     color: white;
     font-style: bold;
     font-size: 25px;
@@ -19,7 +21,4 @@ h1, h5, .lead {
     text-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
 }
 
-.form-control {
-    text-align: center;
-}
 

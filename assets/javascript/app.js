@@ -1,80 +1,78 @@
-document.addEventListener('DOMContentLoaded', function () {
-	q = "finger guns"; // search query
-	
-	request = new XMLHttpRequest;
-	request.open('GET', 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag='+q, true);
-	
-	request.onload = function() {
-		if (request.status >= 200 && request.status < 400){
-			data = JSON.parse(request.responseText).data.image_url;
-			console.log(data);
-			document.getElementById("giphyme").innerHTML = '<center><img src = "'+data+'"  title="GIF via Giphy"></center>';
-		} else {
-			console.log('reached giphy, but API returned an error');
-		 }
-	};
+$(document).ready(function() {
 
-	request.onerror = function() {
-		console.log('connection error');
-	};
+    //Array of GIFs
+    var gifs = ["Hardwell", "Tiesto", "Armin Van Buuren", "David Guetta", "Carl Cox", "Swedish House Mafia", "Steve Aoki", "Kaskade", "Avicii", "Dash Berlin", "Daft Punk"];
+    
+    //Function of re-rendering HTML to display new GIFs
+    function displayDiv(){
 
-	request.send();
-});
+        var gif = $(this).attr("data-name");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&limit=10&rating=g&api_key=dc6zaTOxFJmzC";
+        
+        //Create AJAX call
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).done(function(response){
+            //Accessing array of GIFs
+            var results = response.data;
+            
+            for (var i = 0; results.length; i++) {
+                var img = $("<img>");
+                var r = $("<p>").text("Rating: " + results[i].rating);
+                var still = response.data[i].images.fixed_height_still.url;
+                var animated = results[i].images.fixed_height.url;
 
-    $("button").on("click", function() {
-      var person = $(this).attr("data-person");
-      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + person + "&api_key=dc6zaTOxFJmzC&limit=10";
+                img.addClass("gifToggle");
+                img.attr("data-still", still);
+                img.attr("data-state", "still");
+                img.attr("data-animate", animated);
+                img.attr("src", still);
+                
+                $("#gif-view").prepend(img);
+                $("#gif-view").prepend(r);
 
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      })
-        .then(function(response) {
-          var results = response.data;
-
-          for (var i = 0; i < results.length; i++) {
-            var gifDiv = $("<div class='item'>");
-
-            var rating = results[i].rating;
-
-            var p = $("<p>").text("Rating: " + rating);
-
-            var personImage = $("<img>");
-            personImage.attr("src", results[i].images.fixed_height.url);
-
-            gifDiv.prepend(p);
-            gifDiv.prepend(personImage);
-
-            $("#gifs-appear-here").prepend(gifDiv);           
-
-          }
+            }
         });
+    }
+
+    //Function to animate or still GIFs
+    function animation(){
+            var state = $(this).attr("data-state");
+            if (state === "still"){
+                $(this).attr("src",$(this).data("animate"));
+                $(this).attr("data-state", "animate");
+            } else {
+                $(this).attr("src", $(this).data("still"));
+                $(this).attr("data-state", "still");
+            }
+        };
+
+    //Rendering new buttons to page
+    function newButtons(){
+        //Empties div 
+        $("#newbuttons").empty();
+        //Loop through the array
+        for (var i = 0; i < gifs.length; i++) {
+            var b = $("<button>").attr({
+                "id": "gifButton",
+                "data-name": gifs[i],
+            }); 
+            b.text(gifs[i]);
+            b.addClass("btn btn-info");
+            $("#newbuttons").append(b); 
+        }
+    }
+    $("#add-gif").on("click", function(event){
+        event.preventDefault();
+        var userInput = $("#gif-input").val().trim();
+        gifs.push(userInput);
+        $("#gif-input").val(" ");
+        newButtons();
     });
 
-    // function runQuery(queryURL) {
-    //   $.ajax({url: queryURL, method: "GET"})
-    //   .done(function(queryURL) {
-    //     console.log(queryURL);
-    //   })
-      
-    // }
+    $(document).on("click", "#gifButton", displayDiv);
+    $(document).on("click", ".gifToggle", animation);
+    newButtons();
 
-    $('#searchBtn').on('click', function() {
-      runQuery("https://api.giphy.com/v1/gifs/search?q=" + person + "&api_key=dc6zaTOxFJmzC&limit=10");
-      
-      return false;
-    })
-
-    // Function to start GIF sill and click to make move and click back to make still
-
-    // $(".gif").on("click", function() {
-    //     var state = $(this).attr("data-state");
-
-    //         if (state === "still") {
-    //         $(this).attr("src", $(this).attr("data-animate"));
-    //         $(this).attr("data-state", "animate");
-    //     } else {
-    //         $(this).attr("src", $(this).attr("data-still"));
-    //         $(this).attr("data-state", "still");
-    //     }
-    // });
+});
