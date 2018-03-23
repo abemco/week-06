@@ -7,7 +7,7 @@ $(document).ready(function() {
     function displayDiv(){
 
         var gif = $(this).attr("data-name");
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&limit=10&rating=g&api_key=dc6zaTOxFJmzC";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&limit=10&rating=g&api_key=ne0uMHF02rGgy41e9wgGAGEdbnCJ1DCS";
         
         //Create AJAX call
         $.ajax({
